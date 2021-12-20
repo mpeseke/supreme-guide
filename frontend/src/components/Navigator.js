@@ -1,7 +1,17 @@
 import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import axios from "axios";
 
 
 export const Navigator = () => {
+
+
+    const getData = (queryString) => {
+        axios.get(`https://pokeapi.co.api/v2/pokemon/${queryString}`)
+            .then(res => {
+                const pokemon = res.data;
+                console.log(pokemon);
+            })
+    }
 
     return (
         <Navbar bg="primary" expand="lg">
@@ -32,10 +42,11 @@ export const Navigator = () => {
                         <FormControl
                             type="search"
                             placeholder="Search"
-                            className="me-2"
+                            className="me-2 m-1"
                             aria-label="Search"
+                            value={queryString}
                         />
-                        <Button variant="outline-success">Search</Button>
+                        <Button type="submit" variant="outline-success">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>
